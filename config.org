@@ -1,0 +1,132 @@
+#+title: Nova's Doom Emacs Config
+#+author: Nova-archx86
+#+description: My personal literate config for doom emacs
+#+options: toc:2
+
+* Variables
+
+** Font & Doom theme
+#+begin_src emacs-lisp :tangle config.el
+(setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
+(setq doom-theme 'doom-nord)
+#+end_src
+
+** Set the opacity
+Sets the alpha for *all* emacs windows. Change the 90 to 100 for a fully opaque window.
+#+begin_src elisp :tangle config.el
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+#+end_src
+
+** Org directory and files
+All of my org documents are located in $HOME/Sync/org for use with syncthing.
+ emms-stop
+Here I also set the location for my org-agenda files as well.
+#+begin_src emacs-lisp :tangle config.el
+(setq org-directory "~/Sync/org")
+(setq org-agenda-files '("~/Sync/org/agenda.org"))
+
+(defun org-agenda-open-hook ()
+  (olivetti-mode))
+
+(add-hook 'org-agenda-mode-hook 'org-agenda-open-hook)
+
+(setq org-agenda-span 1
+      org-agenda-start-day "+0d"
+      org-agenda-skip-timestamp-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-scheduled-done t
+      org-agenda-skip-scheduled-if-deadline-is-shown t
+      org-agenda-skip-timestamp-if-deadline-is-shown t)
+
+(setq org-agenda-current-time-string "")
+(setq org-agenda-time-grid '((daily) () "" ""))
+(setq org-agenda-hide-tags-regexp ".*")
+#+end_src
+
+* Package specific configurations
+** Elfeed
+RSS reader. The default file location does not need to be set as the default location is always org-directory/elfeed.org
+#+begin_src emacs-lisp :tangle config.el
+
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+(setq elfeed-goodies/entry-pane-size 0.5)
+
+;; Auto update feeds
+(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
+#+end_src
+
+** Elcord
+Elcord is a simple elisp discord rich presense script.
+There is no practicality to this package other than it just provides a cool looking discord rich presense for doom emacs.
+#+begin_src emacs-lisp :tangle config.el
+(use-package! elcord
+  :ensure t)
+#+end_src
+
+** EMMS using mpd and mpc (configuration courtesy of Uncle Dave's channel)
+The initial setup just contains some boiler plate code to connect to the mpd daemon and set a default music directory to use, along with keybindings to my liking.
+As a note, sometimes for god knows whatever reason, mpd will immediately try to connect to an IPv6 socket over everything else, to disable this set the "bind_to_address" variable in your mpd.conf to "0.0.0.0" to for IPv4.
+The "<XF86Audio>" keys are just keys on a keyboard (typically on laptops) that have special functionallity for media players.
+
+#+begin_src emacs-lisp :tangle config.el
+(use-package! emms
+  :config
+   (emms-all)
+   (setq emms-player-list '(emms-player-mpd))
+   (setq emms-seek-seconds 5)
+   (setq emms-info-functions '(emms-info-mpd))
+   (setq emms-source-file-default-directory "~/Music")
+   (setq emms-player-mpd-server-name "0.0.0.0")
+   (setq emms-player-mpd-server-port "6600")
+   (setq emms-player-mpd-music-directory "~/Music")
+   :bind
+    ("<XF86AudioPrev>" . emms-previous)
+    ("<XF86AudioNext>" . emms-next)
+    ("<XF86AudioPlay>" . emms-pause)
+    ("<XF86AudioStop>" . emms-stop))
+#+end_src
+
+*** MPC setup
+Set the MPC client to the socket address that mpd is listening on
+
+#+begin_src emacs-lisp :tangle config.el
+(setq mpc-host "0.0.0.0:6600")
+#+end_src
+
+A function to automatically update the mpd database through mpc
+
+#+begin_src elisp :tangle config.el
+(defun mpd/update-database ()
+  "Updates the MPD database synchronously."
+  (interactive)
+  (call-process "mpc" nil nil nil "update")
+  (message "MPD Database Updated!"))
+;;(global-set-key (kbd "s-m u") 'mpd/update-database)
+#+end_src
+
+** Org-mode pkgs
+
+*** Org-roam
+#+begin_src emacs-lisp :tangle config.el
+(setq org-roam-directory "~/Sync/org/roam")
+#+end_src
+
+*** Org-roam-ui
+#+begin_src emacs-lisp :tangle config.el
+(use-package! websocket)
+
+(use-package! org-roam-ui
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+#+end_src
+
+*** Org-modern
+#+begin_src emacs-lisp :tangle config.el
+(with-eval-after-load 'org (global-org-modern-mode))
+#+end_src
