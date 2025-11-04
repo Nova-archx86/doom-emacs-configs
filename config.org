@@ -14,7 +14,7 @@
 ** Set the opacity
 Sets the alpha for *all* emacs windows. Change the 90 to 100 for a fully opaque window.
 #+begin_src elisp :tangle config.el
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 100))
 #+end_src
 
 ** Org directory and files
