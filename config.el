@@ -1,7 +1,7 @@
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
 (setq doom-theme 'doom-nord)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 100))
 
 (setq org-directory "~/Sync/org")
 (setq org-agenda-files '("~/Sync/org/agenda.org"))
