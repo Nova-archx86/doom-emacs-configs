@@ -5,8 +5,9 @@
 
 * Variables
 
-** Font & Doom theme
+** Font, Doom theme, and Splash 
 #+begin_src emacs-lisp :tangle config.el
+(setq fancy-splash-image (expand-file-name "doom-splash.svg" doom-user-dir))
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
 (setq doom-theme 'doom-ir-black)
 #+end_src
