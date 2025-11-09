@@ -8,7 +8,7 @@
 ** Font & Doom theme
 #+begin_src emacs-lisp :tangle config.el
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
-(setq doom-theme 'modus-vivendi-tritanopia)
+(setq doom-theme 'doom-ir-black)
 #+end_src
 
 ** Set the opacity
