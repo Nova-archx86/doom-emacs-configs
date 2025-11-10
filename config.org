@@ -9,7 +9,7 @@
 #+begin_src emacs-lisp :tangle config.el
 (setq fancy-splash-image (expand-file-name "emacs.svg" doom-user-dir))
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
-(setq doom-theme 'doom-ir-black)
+(setq doom-theme 'doom-zenburn)
 #+end_src
 
 ** Set the opacity
