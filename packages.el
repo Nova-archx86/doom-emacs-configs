@@ -59,3 +59,4 @@
 (package! org-modern)
 (package! mu4e-alert)
 (package! org-msg)
+(package! gruber-darker-theme)
