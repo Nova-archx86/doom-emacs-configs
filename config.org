@@ -3,17 +3,11 @@
 #+description: My personal literate config for doom emacs
 #+options: toc:2
 
-* Installation
-Installing my configuration is failry easy and just requires a git clone into ~/.config/doom
-#+begin_src shell
-git clone https://github.com/Nova-archx86/doom-emacs-configs ~/.config/doom && ~/.config/emacs/bin/doom sync
-#+end_src
-
 * Variables
 
 ** Font, Doom theme, and Splash 
 #+begin_src emacs-lisp :tangle config.el
-(setq fancy-splash-image (expand-file-name "doom-splash.svg" doom-user-dir))
+(setq fancy-splash-image (expand-file-name "emacs.svg" doom-user-dir))
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
 (setq doom-theme 'doom-ir-black)
 #+end_src
