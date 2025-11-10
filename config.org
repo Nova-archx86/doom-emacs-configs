@@ -9,13 +9,13 @@
 #+begin_src emacs-lisp :tangle config.el
 (setq fancy-splash-image (expand-file-name "emacs.svg" doom-user-dir))
 (setq doom-font (font-spec :family "0xProto Nerd Font" :size 15))
-(setq doom-theme 'gruber-darker)
+(setq doom-theme 'doom-nord)
 #+end_src
 
 ** Set the opacity
 Sets the alpha for *all* emacs windows. Change the 90 to 100 for a fully opaque window.
 #+begin_src elisp :tangle config.el
-(add-to-list 'default-frame-alist '(alpha-background . 100))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 #+end_src
 
 ** Org directory and files
