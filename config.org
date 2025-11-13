@@ -138,7 +138,11 @@ My configs for varrious lsps (mostly just for c-mode and cland)
 *** Clangd
 Good lord is header insertion annoying! I know how to include files clangd!
 #+begin_src emacs-lisp :tangle config.el
-(after! lsp-clangd
-  (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators=0"))
-
+(setq lsp-clients-clangd-args '("-j=3"
+				"--background-index"
+				"--clang-tidy"
+				"--completion-style=detailed"
+				"--header-insertion=never"
+				"--header-insertion-decorators=0"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
 #+end_src
