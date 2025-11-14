@@ -132,6 +132,14 @@ A function to automatically update the mpd database through mpc
 (with-eval-after-load 'org (global-org-modern-mode))
 #+end_src
 
+*** Org-download
+#+begin_src emacs-lisp :tangle config.el
+(require 'org-download)
+
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+#+end_src
+
 ** Language Servers
 My configs for varrious lsps (mostly just for c-mode and cland)
 
