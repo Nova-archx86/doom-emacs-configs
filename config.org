@@ -1,6 +1,7 @@
 #+title: Nova's Doom Emacs Config
 #+author: Nova-archx86
 #+description: My personal literate config for doom emacs
+#+TOC: headlines 2
 #+options: toc:2
 
 * Variables
